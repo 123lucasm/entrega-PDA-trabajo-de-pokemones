@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación Pokedex</title>
+    <link rel="stylesheet" href="css.css"> <!-- Hoja de estilos -->
+</head>
+<body>
+    <header>
+        <h1>Pokedex Lucas Malseñido</h1>
+        <div>
+            <input type="text" id="buscar" placeholder="Ingrese nombre pokemon" /> <!-- Campo de búsqueda -->
+            <button id="boton-buscar">Buscar</button> <!-- Botón para buscar -->
+        </div>
+    </header>
+    
+    <main>
+        <section id="lista-pokemones"></section> <!-- Lista de Pokémon -->
+    </main>
+
+    <div id="modal-pokemon" class="modal">
+        <div class="contenido-modal">
+            <span class="cerrar">&times;</span> <!-- Botón para cerrar el modal -->
+            <div class="imagen-superior">
+                <img id="imagen-pokemon" alt="Imagen del Pokémon" /> <!-- Imagen del Pokémon -->
+            </div>
+            <h2 id="nombre-pokemon"></h2> <!-- Nombre del Pokémon -->
+            <p><strong>Experiencia:</strong> <span id="base-experiencia"></span> XP</p> <!-- Experiencia -->
+            <p><strong>Altura:</strong> <span id="altura-pokemon"></span></p> <!-- Altura -->
+            <p><strong>Peso:</strong> <span id="peso-pokemon"></span></p> <!-- Peso -->
+            <h3>Tipo</h3>
+            <div id="tipos-pokemon" class="tipos"></div> <!-- Tipos del Pokémon -->
+            <h3>Habilidades</h3>
+            <div id="habilidades-pokemon" class="habilidades"></div> <!-- Habilidades del Pokémon -->
+        </div>
+    </div>
+
+    <script src="js.js"></script> <!-- Script de lógica -->
+</body>
+</html>
