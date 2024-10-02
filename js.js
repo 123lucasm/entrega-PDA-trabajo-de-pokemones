@@ -25,14 +25,20 @@ function mostrarPokemones(pokemones) {
     const listaPokemones = document.getElementById('lista-pokemones');
     listaPokemones.innerHTML = ''; // Limpia la lista actual
 
-    // Itera sobre cada Pokémon y obtiene sus detalles
-    pokemones.forEach(pokemon => {
-        fetch(pokemon.url)
-            .then(respuesta => respuesta.json())
-            .then(detalles => {
-                const tarjetaPokemon = crearTarjetaPokemon(detalles); // Crea tarjeta para cada Pokémon
-                listaPokemones.appendChild(tarjetaPokemon); // Agrega la tarjeta a la lista
-            });
+    // Obtén detalles de cada Pokémon y crea una lista ordenada por ID
+    const promesas = pokemones.map(pokemon => 
+        fetch(pokemon.url).then(respuesta => respuesta.json())
+    );
+
+    Promise.all(promesas).then(detallesPokemones => {
+        // Ordena los Pokémon por ID
+        detallesPokemones.sort((a, b) => a.id - b.id);
+
+        // Muestra cada Pokémon ordenado
+        detallesPokemones.forEach(detalles => {
+            const tarjetaPokemon = crearTarjetaPokemon(detalles); // Crea tarjeta para cada Pokémon
+            listaPokemones.appendChild(tarjetaPokemon); // Agrega la tarjeta a la lista
+        });
     });
 }
 
@@ -121,17 +127,12 @@ function mostrarDetalles(pokemon) {
         modal.style.display = 'none';
     });
 
-    document.querySelector('.cerrar-boton').addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
 }
 
 // Función para buscar un Pokémon por nombre
 function buscarPokemon() {
     const terminoBusqueda = document.getElementById('buscar').value.toLowerCase();
     const url = `https://pokeapi.co/api/v2/pokemon/${terminoBusqueda}`;
-
-    console.log("Buscando Pokémon:", terminoBusqueda); // Registro de depuración
 
     if (terminoBusqueda) {
         fetch(url)
